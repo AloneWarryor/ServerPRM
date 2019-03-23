@@ -1,27 +1,36 @@
 package com.fpt.prm.controller;
 
+import java.security.Principal;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fpt.prm.mapper.ProductMapper;
+import com.fpt.prm.model.Account;
 import com.fpt.prm.model.BaseResponse;
 import com.fpt.prm.model.Product;
+import com.fpt.prm.model.RegMappingEntity;
 
 @RestController
 @RequestMapping("api")
 @CrossOrigin
 public class ProductController {
 
-	@Autowired ProductMapper productMapper;
-	
+	@Autowired
+	ProductMapper productMapper;
+
 	// Fetches all products
 	@GetMapping(value = "products")
 	public ResponseEntity<BaseResponse> getAllproducts() {
@@ -36,7 +45,7 @@ public class ProductController {
 		}
 		return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
 	}
-	
+
 	@GetMapping(value = "products/{typeId}")
 	public ResponseEntity<BaseResponse> getAllproductsByTypeId(@PathVariable("typeId") String typeId) {
 		BaseResponse baseResponse = new BaseResponse(0, null);
@@ -50,7 +59,7 @@ public class ProductController {
 		}
 		return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
 	}
-	
+
 	@GetMapping(value = "products/{productId}")
 	public ResponseEntity<BaseResponse> getProductByID(@PathVariable("productId") String productId) {
 		BaseResponse baseResponse = new BaseResponse(0, null);
@@ -64,5 +73,21 @@ public class ProductController {
 			e.printStackTrace();
 		}
 		return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
+	}
+
+	// Creates a new product
+	@PostMapping(path = "/product", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<BaseResponse> addArticle(@RequestBody Product product, Principal principal) {
+		BaseResponse baseResponse = new BaseResponse(0, null);
+		try {
+			int status = productMapper.createNewProduct(new Product(0, product.getProductName(), product.getProductID(), product.getPrice(), principal.getName(), product.getDescription(), product.getImage(), false, product.getAddressID(), 1, product.getNumberOfDaysPriority(), new Date(), new Date(), principal.getName(),principal.getName()));
+			baseResponse.setStatus(status);
+		} catch (Exception e) {
+			baseResponse.setStatus(0);
+			e.printStackTrace();
+			return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
+		}
+
+		return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.CREATED);
 	}
 }

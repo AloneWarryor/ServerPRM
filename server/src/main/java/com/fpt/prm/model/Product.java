@@ -15,13 +15,13 @@ import lombok.Setter;
 public class Product {
 	private int productID;
 	private String productName;
-	private String typeID;
+	private int typeID;
 	private Long price;
 	private String userName;
 	private String description;
 	private String image;
 	private boolean status;
-	private String addressID;
+	private int addressID;
 	private int priority;
 	private int numberOfDaysPriority;
 	private Date createdDate;
@@ -30,8 +30,8 @@ public class Product {
 	private String updatedUser;
 	private List<Image> images;
 	
-	public Product(int productID, String productName, String typeID, Long price, String userName, String description,
-			String image, boolean status, String addressID, int priority, int numberOfDaysPriority, Date createdDate,
+	public Product(int productID, String productName, int typeID, Long price, String userName, String description,
+			String image, boolean status, int addressID, int priority, int numberOfDaysPriority, Date createdDate,
 			Date updatedDate, String createUser, String updatedUser) {
 		super();
 		this.productID = productID;

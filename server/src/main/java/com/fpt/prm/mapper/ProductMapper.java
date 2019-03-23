@@ -14,5 +14,7 @@ public interface ProductMapper {
 	public Product getProductByID(String productId);
 	
 	public List<Image> getProductPicByID(String productId);
+
+	public int createNewProduct(Product product);
 	
 }
