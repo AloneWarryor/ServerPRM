@@ -16,5 +16,7 @@ public interface ProductMapper {
 	public List<Image> getProductPicByID(int productId);
 
 	public int createNewProduct(Product product);
+
+	public void addImage(Image image);
 	
 }

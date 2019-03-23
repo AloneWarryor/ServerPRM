@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fpt.prm.mapper.ProductMapper;
 import com.fpt.prm.model.Account;
 import com.fpt.prm.model.BaseResponse;
+import com.fpt.prm.model.Image;
 import com.fpt.prm.model.Product;
+import com.fpt.prm.model.ProductParam;
 import com.fpt.prm.model.RegMappingEntity;
 
 @RestController
@@ -77,11 +79,14 @@ public class ProductController {
 
 	// Creates a new product
 	@PostMapping(path = "/product", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<BaseResponse> addArticle(@RequestBody Product product, Principal principal) {
+	public ResponseEntity<BaseResponse> addArticle(@RequestBody ProductParam product, Principal principal) {
 		BaseResponse baseResponse = new BaseResponse(0, null);
 		try {
-			int status = productMapper.createNewProduct(new Product(0, product.getProductName(), product.getProductID(), product.getPrice(), principal.getName(), product.getDescription(), product.getImage(), false, product.getAddressID(), 1, product.getNumberOfDaysPriority(), new Date(), new Date(), principal.getName(),principal.getName()));
-			baseResponse.setStatus(status);
+			int productID = productMapper.createNewProduct(new Product(0, product.getProductName(), product.getProductID(), product.getPrice(), principal.getName(), product.getDescription(), product.getImage().get(0), false, product.getAddressID(), 1, product.getNumberOfDaysPriority(), new Date(), new Date(), principal.getName(),principal.getName()));
+			for (String image : product.getImage()) {
+				productMapper.addImage(new Image(productID, image, new Date(), new Date(), principal.getName(), principal.getName()));
+			}
+			baseResponse.setStatus(1);
 		} catch (Exception e) {
 			baseResponse.setStatus(0);
 			e.printStackTrace();

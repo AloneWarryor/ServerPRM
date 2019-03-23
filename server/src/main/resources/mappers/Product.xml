@@ -27,4 +27,57 @@ FROM image
 WHERE image.productID = #{productId}
 </select>
 
+<insert id="addImage" parameterType="com.fpt.prm.model.Image">
+    INSERT INTO `cho_tot`.`image`
+(`productID`,
+`image`,
+`createdDate`,
+`updatedDate`,
+`createdUser`,
+`updatedUser`)
+VALUES
+(#{productID},
+#{image},
+#{createdDate},
+#{updatedDate},
+#{createdUser},
+#{updatedUser});
+
+</insert>
+
+<insert id="createNewProduct" parameterType="com.fpt.prm.model.Product" useGeneratedKeys="true" keyProperty="productID" keyColumn="productID">
+   INSERT INTO `cho_tot`.`product`
+(`productName`,
+`typeID`,
+`price`,
+`userName`,
+`description`,
+`image`,
+`status`,
+`addressID`,
+`priority`,
+`numberOfDaysPriority`,
+`createdDate`,
+`updatedDate`,
+`createdUser`,
+`updatedUser`)
+VALUES
+#{productName},
+#{typeID},
+#{price},
+#{userName},
+#{description},
+#{image},
+#{status},
+#{addressID},
+#{priority},
+#{numberOfDaysPriority},
+#{createdDate},
+#{updatedDate},
+#{createdUser},
+#{updatedUser});
+
+
+</insert>
+
 </mapper>
