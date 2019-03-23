@@ -9,7 +9,7 @@ FROM product
 WHERE product.status = 1
 </select>
 
-<select id="getAllProductActiveByTypeId" parameterType="String" resultType="com.fpt.prm.model.Product">
+<select id="getAllProductActiveByTypeId" parameterType="Integer" resultType="com.fpt.prm.model.Product">
 SELECT *
 FROM product
 WHERE product.status = 1 AND product.typeID = #{typeId}

@@ -46,19 +46,19 @@ public class ProductController {
 		return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "products/{typeId}")
-	public ResponseEntity<BaseResponse> getAllproductsByTypeId(@PathVariable("typeId") String typeId) {
-		BaseResponse baseResponse = new BaseResponse(0, null);
-		try {
-			List<Product> data = productMapper.getAllProductActiveByTypeId(typeId);
-			baseResponse.setStatus(1);
-			baseResponse.setData(data);
-		} catch (Exception e) {
-			baseResponse.setStatus(0);
-			e.printStackTrace();
-		}
-		return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
-	}
+//	@GetMapping(value = "products/{typeId}")
+//	public ResponseEntity<BaseResponse> getAllproductsByTypeId(@PathVariable("typeId") String typeId) {
+//		BaseResponse baseResponse = new BaseResponse(0, null);
+//		try {
+//			List<Product> data = productMapper.getAllProductActiveByTypeId(typeId);
+//			baseResponse.setStatus(1);
+//			baseResponse.setData(data);
+//		} catch (Exception e) {
+//			baseResponse.setStatus(0);
+//			e.printStackTrace();
+//		}
+//		return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
+//	}
 
 	@GetMapping(value = "products/{productId}")
 	public ResponseEntity<BaseResponse> getProductByID(@PathVariable("productId") int productId) {
