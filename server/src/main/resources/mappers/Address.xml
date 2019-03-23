@@ -1,0 +1,15 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fpt.prm.mapper.AddressMapper">
+
+<select id="findAddAddress" resultType="com.fpt.prm.model.Address">
+SELECT *
+FROM `address`
+</select>
+
+<select id="findAddAddressByID" resultType="com.fpt.prm.model.Address" parameterType="Integer">
+SELECT *
+FROM `address` WHERE address.addressID = #{addressID}
+</select>
+</mapper>
