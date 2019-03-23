@@ -1,5 +1,6 @@
 package com.fpt.prm.config;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class DefaultUserDetailsService implements UserDetailsService {
 
     private UserDetails mockUser(String username) {
     	Account acc = accountMapper.findByUsername(username);
-        if (!acc.getUsername().equals(username)) {
+        if (!acc.getUserName().equals(username)) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
 
@@ -34,15 +35,19 @@ public class DefaultUserDetailsService implements UserDetailsService {
         // password will be stored in bcrypt in this example
         // you can also use a prefix, @see com.patternmatch.oauth2blog.config.AuthorizationServerConfig#CLIENT_SECRET
         UserDetails user = User.withDefaultPasswordEncoder()
-                .username(acc.getUsername())
+                .username(acc.getUserName())
                 .password(acc.getPassword())
-                .authorities(getAuthority())
+                .authorities(getAuthority(acc))
                 .build();
 
         return user;
     }
 
-    private List<SimpleGrantedAuthority> getAuthority() {
-        return Collections.emptyList();
+    private List<SimpleGrantedAuthority> getAuthority(Account acc) {
+    	List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
+    	for (String autho : acc.getRole().split(",")) {
+    		authorities.add(new SimpleGrantedAuthority(autho));
+		}
+        return authorities;
     }
 }

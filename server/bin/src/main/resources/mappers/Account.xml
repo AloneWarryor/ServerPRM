@@ -2,7 +2,6 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fpt.prm.mapper.AccountMapper">
-
 <resultMap id="AccountMap" type="com.fpt.prm.model.Account">
     <result column="userName" property="userName"></result>
     <result column="password" property="password"></result>
@@ -19,7 +18,7 @@
     <result column="updatedDate" property="updatedDate"></result>
 </resultMap>
  
-<select id="findAllUsers" resultMap="AccountMap">
+<select id="findAll" resultMap="AccountMap">
 SELECT `account`.`userName`,
     `account`.`password`,
     `account`.`fullName`,
@@ -52,35 +51,4 @@ SELECT `account`.`userName`,
 FROM `account`
 WHERE userName = #{username}
 </select>
-<insert id="regUser" parameterType="com.fpt.prm.model.Account">
-INSERT INTO `cho_tot`.`account`
-			(`userName`,
-			`password`,
-			`fullName`,
-			`address`,
-			`phoneNumber`,
-			`email`,
-			`avatar`,
-			`money`,
-			`role`,
-			`createUser`,
-			`createdDate`,
-			`updatedUser`,
-			`updatedDate`)
-		VALUES
-			(#{userName},
-			#{password},
-			#{fullName},
-			#{address},
-			#{phoneNumber},
-			#{email},
-			#{avatar},
-			#{money},
-			#{role},
-			#{createUser},
-			NOW(),
-			#{updatedUser},
-			NOW());
-</insert>
-
 </mapper>

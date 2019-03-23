@@ -1,0 +1,30 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fpt.prm.mapper.ProductMapper">
+
+<select id="getAllProductActive" resultMap="com.fpt.prm.model.Product">
+SELECT *
+FROM product
+WHERE product.status = 1
+</select>
+
+<select id="getAllProductActiveByTypeId" parameterType="String" resultMap="com.fpt.prm.model.Product">
+SELECT *
+FROM product
+WHERE product.status = 1 AND product.typeID = #{typeId}
+</select>
+
+<select id="getProductByID" parameterType="String" resultMap="com.fpt.prm.model.Product">
+SELECT *
+FROM product
+WHERE product.productID = #{productId}
+</select>
+
+<select id="getProductPicByID" parameterType="String" resultMap="com.fpt.prm.model.Image">
+SELECT *
+FROM image
+WHERE image.productID = #{productId}
+</select>
+
+</mapper>
