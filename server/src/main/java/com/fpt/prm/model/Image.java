@@ -12,14 +12,14 @@ import lombok.Setter;
 @Setter
 @JsonAutoDetect(fieldVisibility = Visibility.ANY)
 public class Image {
-	private String productID;
+	private int productID;
 	private String image;
 	private String createUser;
 	private Date createdDate;
 	private String updatedUser;
 	private Date updatedDate;
 
-	public Image(String productID, String image, String createUser, Date createdDate, String updatedUser,
+	public Image(int productID, String image, String createUser, Date createdDate, String updatedUser,
 			Date updatedDate) {
 		super();
 		this.productID = productID;

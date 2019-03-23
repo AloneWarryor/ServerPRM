@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @JsonAutoDetect(fieldVisibility = Visibility.ANY)
 public class ProductType {
-	private String typeID;
+	private int typeID;
 	private String typeName;
 	private String typeImage;
 	private String createUser;
@@ -20,7 +20,7 @@ public class ProductType {
 	private String updatedUser;
 	private Date updatedDate;
 	
-	public ProductType(String typeID, String typeName, String typeImage, String createUser, Date createdDate,
+	public ProductType(int typeID, String typeName, String typeImage, String createUser, Date createdDate,
 			String updatedUser, Date updatedDate) {
 		super();
 		this.typeID = typeID;

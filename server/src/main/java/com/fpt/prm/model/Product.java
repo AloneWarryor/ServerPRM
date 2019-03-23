@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @JsonAutoDetect(fieldVisibility = Visibility.ANY)
 public class Product {
-	private String productID;
+	private int productID;
 	private String productName;
 	private String typeID;
 	private Long price;
@@ -30,7 +30,7 @@ public class Product {
 	private Date updatedDate;
 	private List<Image> images;
 	
-	public Product(String productID, String productName, String typeID, Long price, String userName, String description,
+	public Product(int productID, String productName, String typeID, Long price, String userName, String description,
 			String image, boolean status, String addressID, int priority, int numberOfDaysPriority, String createUser,
 			Date createdDate, String updatedUser, Date updatedDate) {
 		super();
