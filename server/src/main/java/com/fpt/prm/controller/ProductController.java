@@ -11,13 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fpt.prm.mapper.AccountMapper;
 import com.fpt.prm.mapper.ProductMapper;
-import com.fpt.prm.mapper.ProductTypeMapper;
-import com.fpt.prm.model.Account;
 import com.fpt.prm.model.BaseResponse;
 import com.fpt.prm.model.Product;
-import com.fpt.prm.model.ProductType;
 
 @RestController
 @RequestMapping("api")

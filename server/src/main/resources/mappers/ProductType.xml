@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fpt.prm.mapper.ProductTypeMapper">
 
-<select id="findAllProductType" resultMap="com.fpt.prm.model.ProductType">
+<select id="findAllProductType" resultType="com.fpt.prm.model.ProductType">
 SELECT *
 FROM product_type
 </select>
