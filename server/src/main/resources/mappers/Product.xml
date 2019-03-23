@@ -15,13 +15,13 @@ FROM product
 WHERE product.status = 1 AND product.typeID = #{typeId}
 </select>
 
-<select id="getProductByID" parameterType="String" resultType="com.fpt.prm.model.Product">
+<select id="getProductByID" parameterType="Integer" resultType="com.fpt.prm.model.Product">
 SELECT *
 FROM product
 WHERE product.productID = #{productId}
 </select>
 
-<select id="getProductPicByID" parameterType="String" resultType="com.fpt.prm.model.Image">
+<select id="getProductPicByID" parameterType="Integer" resultType="com.fpt.prm.model.Image">
 SELECT *
 FROM image
 WHERE image.productID = #{productId}

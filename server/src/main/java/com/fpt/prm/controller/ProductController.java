@@ -61,7 +61,7 @@ public class ProductController {
 	}
 
 	@GetMapping(value = "products/{productId}")
-	public ResponseEntity<BaseResponse> getProductByID(@PathVariable("productId") String productId) {
+	public ResponseEntity<BaseResponse> getProductByID(@PathVariable("productId") int productId) {
 		BaseResponse baseResponse = new BaseResponse(0, null);
 		try {
 			Product data = productMapper.getProductByID(productId);
