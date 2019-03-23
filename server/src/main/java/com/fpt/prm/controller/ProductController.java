@@ -36,7 +36,7 @@ public class ProductController {
 	ProductMapper productMapper;
 
 	// Fetches all products
-	@GetMapping(value = "products")
+	@GetMapping(value = "public/products")
 	public ResponseEntity<BaseResponse> getAllproducts() {
 		BaseResponse baseResponse = new BaseResponse(0, null);
 		try {
@@ -54,7 +54,7 @@ public class ProductController {
 	}
 	
 	// Fetches all products by key
-		@GetMapping(value = "productsSearch/{searchKey}")
+		@GetMapping(value = "public/productsSearch/{searchKey}")
 		public ResponseEntity<BaseResponse> getProductBySeachkey(@PathVariable("searchKey") String searchKey) {
 			BaseResponse baseResponse = new BaseResponse(0, null);
 			try {
@@ -72,7 +72,7 @@ public class ProductController {
 		}
 		
 		// Fetches all products by key and location
-				@GetMapping(value = "productsSearch/{typeID}/{searchKey}")
+				@GetMapping(value = "public/productsSearch/{typeID}/{searchKey}")
 				public ResponseEntity<BaseResponse> getProductBySeachkey(@PathVariable("searchKey") String searchKey, @PathVariable("typeID") String typeID) {
 					BaseResponse baseResponse = new BaseResponse(0, null);
 					try {
@@ -106,7 +106,7 @@ public class ProductController {
 //		return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
 //	}
 
-	@GetMapping(value = "products/{productId}")
+	@GetMapping(value = "public/products/{productId}")
 	public ResponseEntity<BaseResponse> getProductByID(@PathVariable("productId") int productId) {
 		BaseResponse baseResponse = new BaseResponse(0, null);
 		try {

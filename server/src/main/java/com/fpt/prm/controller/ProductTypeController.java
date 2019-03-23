@@ -22,7 +22,7 @@ public class ProductTypeController {
 	@Autowired ProductTypeMapper productTypeMapper;
 	
 	// Fetches all productTypes
-	@GetMapping(value = "productTypes")
+	@GetMapping(value = "public/productTypes")
 	public ResponseEntity<BaseResponse> getAllproductTypes() {
 		BaseResponse baseResponse = new BaseResponse(0, null);
 		try {
