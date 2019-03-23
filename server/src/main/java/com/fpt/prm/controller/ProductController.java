@@ -39,6 +39,9 @@ public class ProductController {
 		BaseResponse baseResponse = new BaseResponse(0, null);
 		try {
 			List<Product> data = productMapper.getAllProductActive();
+			for (Product product : data) {
+				product.setImages(productMapper.getProductPicByID(product.getProductID()));;
+			}
 			baseResponse.setStatus(1);
 			baseResponse.setData(data);
 		} catch (Exception e) {
