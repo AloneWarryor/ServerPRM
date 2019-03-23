@@ -1,6 +1,7 @@
 package com.fpt.prm.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import com.fpt.prm.model.Image;
 import com.fpt.prm.model.Product;
@@ -18,5 +19,9 @@ public interface ProductMapper {
 	public int createNewProduct(Product product);
 
 	public void addImage(Image image);
+
+	public List<Product> getAllProductActiveByKey(String searchKey);
+
+	public List<Product> getAllProductActiveByKeyAndLocation(Map<String, String> paramMap);
 	
 }

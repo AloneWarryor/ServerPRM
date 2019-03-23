@@ -3,7 +3,9 @@ package com.fpt.prm.controller;
 import java.security.Principal;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,6 +52,45 @@ public class ProductController {
 		}
 		return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
 	}
+	
+	// Fetches all products by key
+		@GetMapping(value = "productsSearch/{searchKey}")
+		public ResponseEntity<BaseResponse> getProductBySeachkey(@PathVariable("searchKey") String searchKey) {
+			BaseResponse baseResponse = new BaseResponse(0, null);
+			try {
+				List<Product> data = productMapper.getAllProductActiveByKey(searchKey);
+				for (Product product : data) {
+					product.setImages(productMapper.getProductPicByID(product.getProductID()));
+				}
+				baseResponse.setStatus(1);
+				baseResponse.setData(data);
+			} catch (Exception e) {
+				baseResponse.setStatus(0);
+				e.printStackTrace();
+			}
+			return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
+		}
+		
+		// Fetches all products by key and location
+				@GetMapping(value = "productsSearch/{typeID}/{searchKey}")
+				public ResponseEntity<BaseResponse> getProductBySeachkey(@PathVariable("searchKey") String searchKey, @PathVariable("typeID") String typeID) {
+					BaseResponse baseResponse = new BaseResponse(0, null);
+					try {
+						Map<String, String> paramMap = new HashMap<String, String>();
+						paramMap.put("searchKey", searchKey);
+						paramMap.put("typeID", typeID);
+						List<Product> data = productMapper.getAllProductActiveByKeyAndLocation(paramMap);
+						for (Product product : data) {
+							product.setImages(productMapper.getProductPicByID(product.getProductID()));
+						}
+						baseResponse.setStatus(1);
+						baseResponse.setData(data);
+					} catch (Exception e) {
+						baseResponse.setStatus(0);
+						e.printStackTrace();
+					}
+					return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
+				}
 
 //	@GetMapping(value = "products/{typeId}")
 //	public ResponseEntity<BaseResponse> getAllproductsByTypeId(@PathVariable("typeId") String typeId) {
