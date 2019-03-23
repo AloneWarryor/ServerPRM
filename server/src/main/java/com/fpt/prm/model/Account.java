@@ -23,14 +23,13 @@ public class Account {
 	private String avatar;
 	private String money;
 	private String role;
-	private String createUser;
 	private Date createdDate;
-	private String updatedUser;
 	private Date updatedDate;
-	
+	private String createUser;
+	private String updatedUser;
 	public Account(String userName, String password, String fullName, String address, String phoneNumber, String email,
-			String avatar, String money, String role, String createUser, Date createdDate, String updatedUser,
-			Date updatedDate) {
+			String avatar, String money, String role, Date createdDate, Date updatedDate, String createUser,
+			String updatedUser) {
 		super();
 		this.userName = userName;
 		this.password = password;
@@ -41,9 +40,11 @@ public class Account {
 		this.avatar = avatar;
 		this.money = money;
 		this.role = role;
-		this.createUser = createUser;
 		this.createdDate = createdDate;
-		this.updatedUser = updatedUser;
 		this.updatedDate = updatedDate;
+		this.createUser = createUser;
+		this.updatedUser = updatedUser;
 	}
+	
+	
 }

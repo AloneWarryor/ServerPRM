@@ -15,20 +15,21 @@ public class ProductType {
 	private int typeID;
 	private String typeName;
 	private String typeImage;
-	private String createUser;
 	private Date createdDate;
-	private String updatedUser;
 	private Date updatedDate;
+	private String createUser;
+	private String updatedUser;
 	
-	public ProductType(int typeID, String typeName, String typeImage, String createUser, Date createdDate,
-			String updatedUser, Date updatedDate) {
+	public ProductType(int typeID, String typeName, String typeImage, Date createdDate, Date updatedDate,
+			String createUser, String updatedUser) {
 		super();
 		this.typeID = typeID;
 		this.typeName = typeName;
 		this.typeImage = typeImage;
-		this.createUser = createUser;
 		this.createdDate = createdDate;
-		this.updatedUser = updatedUser;
 		this.updatedDate = updatedDate;
+		this.createUser = createUser;
+		this.updatedUser = updatedUser;
 	}
+	
 }

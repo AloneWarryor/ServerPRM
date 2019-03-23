@@ -24,15 +24,15 @@ public class Product {
 	private String addressID;
 	private int priority;
 	private int numberOfDaysPriority;
-	private String createUser;
 	private Date createdDate;
-	private String updatedUser;
 	private Date updatedDate;
+	private String createUser;
+	private String updatedUser;
 	private List<Image> images;
 	
 	public Product(int productID, String productName, String typeID, Long price, String userName, String description,
-			String image, boolean status, String addressID, int priority, int numberOfDaysPriority, String createUser,
-			Date createdDate, String updatedUser, Date updatedDate) {
+			String image, boolean status, String addressID, int priority, int numberOfDaysPriority, Date createdDate,
+			Date updatedDate, String createUser, String updatedUser) {
 		super();
 		this.productID = productID;
 		this.productName = productName;
@@ -45,9 +45,11 @@ public class Product {
 		this.addressID = addressID;
 		this.priority = priority;
 		this.numberOfDaysPriority = numberOfDaysPriority;
-		this.createUser = createUser;
 		this.createdDate = createdDate;
-		this.updatedUser = updatedUser;
 		this.updatedDate = updatedDate;
+		this.createUser = createUser;
+		this.updatedUser = updatedUser;
 	}
+	
+	
 }

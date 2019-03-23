@@ -14,19 +14,19 @@ import lombok.Setter;
 public class Image {
 	private int productID;
 	private String image;
-	private String createUser;
 	private Date createdDate;
-	private String updatedUser;
 	private Date updatedDate;
-
-	public Image(int productID, String image, String createUser, Date createdDate, String updatedUser,
-			Date updatedDate) {
+	private String createUser;
+	private String updatedUser;
+	public Image(int productID, String image, Date createdDate, Date updatedDate, String createUser,
+			String updatedUser) {
 		super();
 		this.productID = productID;
 		this.image = image;
-		this.createUser = createUser;
 		this.createdDate = createdDate;
-		this.updatedUser = updatedUser;
 		this.updatedDate = updatedDate;
+		this.createUser = createUser;
+		this.updatedUser = updatedUser;
 	}
+
 }
