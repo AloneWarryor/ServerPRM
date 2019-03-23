@@ -40,7 +40,7 @@ public class ProductController {
 		try {
 			List<Product> data = productMapper.getAllProductActive();
 			for (Product product : data) {
-				product.setImages(productMapper.getProductPicByID(product.getProductID()));;
+				product.setImages(productMapper.getProductPicByID(product.getProductID()));
 			}
 			baseResponse.setStatus(1);
 			baseResponse.setData(data);
@@ -70,7 +70,7 @@ public class ProductController {
 		BaseResponse baseResponse = new BaseResponse(0, null);
 		try {
 			Product data = productMapper.getProductByID(productId);
-			data.setImages(productMapper.getProductPicByID(productId));
+			data.setImages(productMapper.getProductPicByID(data.getProductID()));
 			baseResponse.setStatus(1);
 			baseResponse.setData(data);
 		} catch (Exception e) {
