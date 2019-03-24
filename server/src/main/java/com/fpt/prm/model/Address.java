@@ -1,5 +1,7 @@
 package com.fpt.prm.model;
 
+import java.util.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,11 +10,11 @@ import lombok.Setter;
 public class Address {
 	private int addressID;
 	private String addressName;
-	private String updatedDate;
+	private Date updatedDate;
 	private String createdUser;
 	private String updatedUser;
 	
-	public Address(int addressID, String addressName, String updatedDate, String createdUser, String updatedUser) {
+	public Address(int addressID, String addressName, Date updatedDate, String createdUser, String updatedUser) {
 		super();
 		this.addressID = addressID;
 		this.addressName = addressName;
