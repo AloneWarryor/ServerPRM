@@ -11,5 +11,6 @@ FROM `address`
 <select id="findAddAddressByID" resultType="com.fpt.prm.model.Address" parameterType="Integer">
 SELECT *
 FROM `address` WHERE address.addressID = #{addressID}
+ORDER BY addressName ASC
 </select>
 </mapper>
