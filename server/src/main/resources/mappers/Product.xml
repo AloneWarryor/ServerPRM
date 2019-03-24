@@ -18,13 +18,13 @@ WHERE product.status = 1 AND product.typeID = #{typeId}
 <select id="getAllProductActiveByKey" parameterType="String" resultType="com.fpt.prm.model.Product">
 SELECT *
 FROM product
-WHERE product.status = 1 AND product.productName = #{searchKey}
+WHERE product.status = 1 AND product.productName LIKE CONCAT("%", #{searchKey}, "%")
 </select>
 
 <select id="getAllProductActiveByKeyAndLocation" parameterType="Map" resultType="com.fpt.prm.model.Product">
 SELECT *
 FROM product
-WHERE product.status = 1 AND product.productName = #{searchKey} AND product.typeID = #{typeID}
+WHERE product.status = 1 AND product.productName LIKE CONCAT("%", #{searchKey}, "%") AND product.typeID = #{typeID}
 </select>
 
 <select id="getProductByID" parameterType="Integer" resultType="com.fpt.prm.model.Product">
@@ -73,7 +73,7 @@ VALUES
 `updatedDate`,
 `createdUser`,
 `updatedUser`)
-VALUES
+VALUES(
 #{productName},
 #{typeID},
 #{price},

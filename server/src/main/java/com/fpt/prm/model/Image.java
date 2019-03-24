@@ -16,16 +16,16 @@ public class Image {
 	private String image;
 	private Date createdDate;
 	private Date updatedDate;
-	private String createUser;
+	private String createdUser;
 	private String updatedUser;
-	public Image(int productID, String image, Date createdDate, Date updatedDate, String createUser,
+	public Image(int productID, String image, Date createdDate, Date updatedDate, String createdUser,
 			String updatedUser) {
 		super();
 		this.productID = productID;
 		this.image = image;
 		this.createdDate = createdDate;
 		this.updatedDate = updatedDate;
-		this.createUser = createUser;
+		this.createdUser = createdUser;
 		this.updatedUser = updatedUser;
 	}
 

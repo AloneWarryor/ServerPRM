@@ -26,13 +26,13 @@ public class Product {
 	private int numberOfDaysPriority;
 	private Date createdDate;
 	private Date updatedDate;
-	private String createUser;
+	private String createdUser;
 	private String updatedUser;
 	private List<Image> images;
 	
 	public Product(int productID, String productName, int typeID, Long price, String userName, String description,
 			String image, boolean status, int addressID, int priority, int numberOfDaysPriority, Date createdDate,
-			Date updatedDate, String createUser, String updatedUser) {
+			Date updatedDate, String createdUser, String updatedUser) {
 		super();
 		this.productID = productID;
 		this.productName = productName;
@@ -47,7 +47,7 @@ public class Product {
 		this.numberOfDaysPriority = numberOfDaysPriority;
 		this.createdDate = createdDate;
 		this.updatedDate = updatedDate;
-		this.createUser = createUser;
+		this.createdUser = createdUser;
 		this.updatedUser = updatedUser;
 	}
 	
