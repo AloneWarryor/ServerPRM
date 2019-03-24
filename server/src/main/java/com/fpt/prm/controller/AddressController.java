@@ -22,7 +22,7 @@ import com.fpt.prm.model.BaseResponse;
 public class AddressController {
 	@Autowired AddressMapper addressMapper;
 	
-	@GetMapping(value = "/address/{id}")
+	@GetMapping(value = "public/address/{id}")
 	public ResponseEntity<BaseResponse> getAddressByID(@PathVariable("id") int addressID) {
 		BaseResponse baseResponse = new BaseResponse(0, null);
 		try {
@@ -36,7 +36,7 @@ public class AddressController {
 		return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/address")
+	@GetMapping(value = "public/address")
 	public ResponseEntity<BaseResponse> getAddressAll() {
 		BaseResponse baseResponse = new BaseResponse(0, null);
 		try {
