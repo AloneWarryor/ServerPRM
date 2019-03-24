@@ -60,9 +60,10 @@ public class ProductController {
 			BaseResponse baseResponse = new BaseResponse(0, null);
 			try {
 				List<ProductResponse> data = productMapper.getAllProductActiveByTypeId(searchKey);
-				for (ProductResponse product : data) {
-					product.setImages(productMapper.getProductPicByID(product.getProductID()));
-				}
+			/* not needed anymore
+			 * for (ProductResponse product : data) {
+			 * product.setImages(productMapper.getProductPicByID(product.getProductID())); }
+			 */
 				baseResponse.setStatus(1);
 				baseResponse.setData(data);
 			} catch (Exception e) {
