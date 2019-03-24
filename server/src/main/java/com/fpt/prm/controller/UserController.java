@@ -29,7 +29,7 @@ public class UserController {
 
 		@Autowired AccountMapper accountMapper;
 		//Fetches user by user name
-		@GetMapping("user/{username}")
+		@GetMapping("public/user/{username}")
 		public ResponseEntity<BaseResponse> getArticleById(@PathVariable("username") String username) {
 			BaseResponse baseResponse = new BaseResponse(0, null);
 			try {
