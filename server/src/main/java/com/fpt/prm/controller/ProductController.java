@@ -25,6 +25,7 @@ import com.fpt.prm.model.BaseResponse;
 import com.fpt.prm.model.Image;
 import com.fpt.prm.model.Product;
 import com.fpt.prm.model.ProductParam;
+import com.fpt.prm.model.ProductResponse;
 import com.fpt.prm.model.RegMappingEntity;
 
 @RestController
@@ -79,8 +80,8 @@ public class ProductController {
 						Map<String, String> paramMap = new HashMap<String, String>();
 						paramMap.put("searchKey", searchKey);
 						paramMap.put("typeID", typeID);
-						List<Product> data = productMapper.getAllProductActiveByKeyAndLocation(paramMap);
-						for (Product product : data) {
+						List<ProductResponse> data = productMapper.getAllProductActiveByKeyAndLocation(paramMap);
+						for (ProductResponse product : data) {
 							product.setImages(productMapper.getProductPicByID(product.getProductID()));
 						}
 						baseResponse.setStatus(1);

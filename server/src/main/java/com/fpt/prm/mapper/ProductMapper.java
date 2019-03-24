@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.fpt.prm.model.Image;
 import com.fpt.prm.model.Product;
+import com.fpt.prm.model.ProductResponse;
 
 public interface ProductMapper {
 	
@@ -22,6 +23,6 @@ public interface ProductMapper {
 
 	public List<Product> getAllProductActiveByKey(String searchKey);
 
-	public List<Product> getAllProductActiveByKeyAndLocation(Map<String, String> paramMap);
+	public List<ProductResponse> getAllProductActiveByKeyAndLocation(Map<String, String> paramMap);
 	
 }
