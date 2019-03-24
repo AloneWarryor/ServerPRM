@@ -1,6 +1,7 @@
 package com.fpt.prm.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -73,6 +74,30 @@ public class ProductController {
 			return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
 		}
 		
+		// Fetches all products by key
+				@GetMapping(value = "public/productImage/{productId}")
+				public ResponseEntity<BaseResponse> getProductImageById(@PathVariable("productId") int productId) {
+					BaseResponse baseResponse = new BaseResponse(0, null);
+					
+					try {
+						List<Image> dataPetch = productMapper.getProductPicByID(productId);
+						List<String> data = new ArrayList<String>();
+						for (Image productResponse : dataPetch) {
+							data.add(productResponse.getImage());
+						}
+					/* not needed anymore
+					 * for (ProductResponse product : data) {
+					 * product.setImages(productMapper.getProductPicByID(product.getProductID())); }
+					 */
+						baseResponse.setStatus(1);
+						baseResponse.setData(data);
+					} catch (Exception e) {
+						baseResponse.setStatus(0);
+						e.printStackTrace();
+					}
+					return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
+				}
+		
 		// Fetches all products by key and location
 				@GetMapping(value = "public/productsSearch/{typeID}/{searchKey}")
 				public ResponseEntity<BaseResponse> getProductBySeachkey(@PathVariable("searchKey") String searchKey, @PathVariable("typeID") String typeID) {
@@ -128,9 +153,9 @@ public class ProductController {
 	public ResponseEntity<BaseResponse> addArticle(@RequestBody ProductParam product, Principal principal) {
 		BaseResponse baseResponse = new BaseResponse(0, null);
 		try {
-			int productID = productMapper.createNewProduct(new Product(0, product.getProductName(), product.getTypeID(), product.getPrice(), principal.getName(), product.getDescription(), product.getImage().get(0), false, product.getAddressID(), product.getPriority(), product.getNumberOfDaysPriority(), new Date(), new Date(), principal.getName(),principal.getName()));
+			int productID = productMapper.createNewProduct(new Product(0, product.getProductName(), product.getTypeID(), product.getPrice(), principal.getName(), product.getDescription(), product.getImage().get(0), false, product.getAddressID(), product.getPriority(), product.getNumberOfDaysPriority(), new Date().getTime(), new Date().getTime(), principal.getName(),principal.getName()));
 			for (String image : product.getImage()) {
-				productMapper.addImage(new Image(productID, image, new Date(), new Date(), principal.getName(), principal.getName()));
+				productMapper.addImage(new Image(productID, image, new Date().getTime(), new Date().getTime(), principal.getName(), principal.getName()));
 			}
 			baseResponse.setStatus(1);
 		} catch (Exception e) {

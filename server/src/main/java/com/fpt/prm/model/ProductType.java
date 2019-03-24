@@ -15,12 +15,12 @@ public class ProductType {
 	private int typeID;
 	private String typeName;
 	private String typeImage;
-	private Date createdDate;
-	private Date updatedDate;
+	private Long createdDate;
+	private Long updatedDate;
 	private String createdUser;
 	private String updatedUser;
 	
-	public ProductType(int typeID, String typeName, String typeImage, Date createdDate, Date updatedDate,
+	public ProductType(int typeID, String typeName, String typeImage, Long createdDate, Long updatedDate,
 			String createdUser, String updatedUser) {
 		super();
 		this.typeID = typeID;

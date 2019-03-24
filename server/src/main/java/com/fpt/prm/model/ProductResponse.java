@@ -24,15 +24,15 @@ public class ProductResponse {
 	private String address;
 	private int priority;
 	private int numberOfDaysPriority;
-	private Date createdDate;
-	private Date updatedDate;
+	private Long createdDate;
+	private Long updatedDate;
 	private String createdUser;
 	private String updatedUser;
 	private List<Image> images;
 	
 	public ProductResponse(int productID, String productName, int typeID, Long price, String userName, String description,
-			String image, boolean status, String address, int priority, int numberOfDaysPriority, Date createdDate,
-			Date updatedDate, String createdUser, String updatedUser) {
+			String image, boolean status, String address, int priority, int numberOfDaysPriority, Long createdDate,
+			Long updatedDate, String createdUser, String updatedUser) {
 		super();
 		this.productID = productID;
 		this.productName = productName;
