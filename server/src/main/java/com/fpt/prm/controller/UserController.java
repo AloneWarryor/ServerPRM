@@ -63,7 +63,7 @@ public class UserController {
 		public ResponseEntity<BaseResponse> addArticle(@RequestBody RegMappingEntity UserInfo) {
 			BaseResponse baseResponse = new BaseResponse(0, null);
 			try {
-				int status = accountMapper.regUser(new Account(UserInfo.getUsername(), UserInfo.getPassword(), "", UserInfo.getAddress(), UserInfo.getPhoneNumber(), UserInfo.getEmail(), null, "0", "user", UserInfo.getUsername(), new Date(), UserInfo.getUsername(), new Date()));
+				int status = accountMapper.regUser(new Account(UserInfo.getUsername(), UserInfo.getPassword(), UserInfo.getFullName(), UserInfo.getAddress(), UserInfo.getPhoneNumber(), UserInfo.getEmail(), null, "0", "user", UserInfo.getUsername(), new Date(), UserInfo.getUsername(), new Date()));
 				baseResponse.setStatus(status);
 				if (status == 1) {
 					baseResponse.setData(accountMapper.findByUsername(UserInfo.getUsername()));
