@@ -24,13 +24,13 @@ public class Account {
 	private String money;
 	private String role;
 	private String createUser;
-	private Long createdDate;
+	private Date createdDate;
 	private String updatedUser;
-	private Long updatedDate;
+	private Date updatedDate;
 	
 	public Account(String userName, String password, String fullName, String address, String phoneNumber, String email,
-			String avatar, String money, String role, String createUser, Long createdDate, String updatedUser,
-			Long updatedDate) {
+			String avatar, String money, String role, String createUser, Date createdDate, String updatedUser,
+			Date updatedDate) {
 		super();
 		this.userName = userName;
 		this.password = password;

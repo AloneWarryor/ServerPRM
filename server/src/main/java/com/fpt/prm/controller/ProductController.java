@@ -153,9 +153,9 @@ public class ProductController {
 	public ResponseEntity<BaseResponse> addArticle(@RequestBody ProductParam product, Principal principal) {
 		BaseResponse baseResponse = new BaseResponse(0, null);
 		try {
-			int productID = productMapper.createNewProduct(new Product(0, product.getProductName(), product.getTypeID(), product.getPrice(), principal.getName(), product.getDescription(), product.getImage().get(0), false, product.getAddressID(), product.getPriority(), product.getNumberOfDaysPriority(), new Date().getTime(), new Date().getTime(), principal.getName(),principal.getName()));
+			int productID = productMapper.createNewProduct(new Product(0, product.getProductName(), product.getTypeID(), product.getPrice(), principal.getName(), product.getDescription(), product.getImage().get(0), false, product.getAddressID(), product.getPriority(), product.getNumberOfDaysPriority(), new Date(), new Date(), principal.getName(),principal.getName()));
 			for (String image : product.getImage()) {
-				productMapper.addImage(new Image(productID, image, new Date().getTime(), new Date().getTime(), principal.getName(), principal.getName()));
+				productMapper.addImage(new Image(productID, image, new Date(), new Date(), principal.getName(), principal.getName()));
 			}
 			baseResponse.setStatus(1);
 		} catch (Exception e) {

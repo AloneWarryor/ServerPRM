@@ -14,11 +14,11 @@ import lombok.Setter;
 public class Image {
 	private int productID;
 	private String image;
-	private Long createdDate;
-	private Long updatedDate;
+	private Date createdDate;
+	private Date updatedDate;
 	private String createdUser;
 	private String updatedUser;
-	public Image(int productID, String image, Long createdDate, Long updatedDate, String createdUser,
+	public Image(int productID, String image, Date createdDate, Date updatedDate, String createdUser,
 			String updatedUser) {
 		super();
 		this.productID = productID;
