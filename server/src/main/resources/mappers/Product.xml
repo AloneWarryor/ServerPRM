@@ -9,10 +9,24 @@ FROM product
 WHERE product.status = 1
 </select>
 
-<select id="getAllProductActiveByTypeId" parameterType="Integer" resultType="com.fpt.prm.model.Product">
-SELECT *
-FROM product
-WHERE product.status = 1 AND product.typeID = #{typeId}
+<select id="getAllProductActiveByTypeId" parameterType="String" resultType="com.fpt.prm.model.ProductResponse">
+SELECT `product`.`productID`,
+    `product`.`productName`,
+    `product`.`typeID`,
+    `product`.`price`,
+    `product`.`userName`,
+    `product`.`description`,
+    `product`.`image`,
+    `product`.`status`,
+    `account`.`address` as `address`,
+    `product`.`priority`,
+    `product`.`numberOfDaysPriority`,
+    `product`.`createdDate`,
+    `product`.`updatedDate`,
+    `product`.`createdUser`,
+    `product`.`updatedUser`
+FROM product JOIN account ON product.userName = account.userName
+WHERE product.status = 1 AND product.typeID = #{typeID}
 </select>
 
 <select id="getAllProductActiveByKey" parameterType="String" resultType="com.fpt.prm.model.Product">

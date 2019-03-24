@@ -11,7 +11,7 @@ public interface ProductMapper {
 	
 	public List<Product> getAllProductActive();
 
-	public List<Product> getAllProductActiveByTypeId(String typeId);
+	public List<ProductResponse> getAllProductActiveByTypeId(String typeId);
 
 	public Product getProductByID(int productId);
 	

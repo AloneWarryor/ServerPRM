@@ -55,12 +55,12 @@ public class ProductController {
 	}
 	
 	// Fetches all products by key
-		@GetMapping(value = "public/productsSearch/{searchKey}")
-		public ResponseEntity<BaseResponse> getProductBySeachkey(@PathVariable("searchKey") String searchKey) {
+		@GetMapping(value = "public/productsSearch/{typeID}")
+		public ResponseEntity<BaseResponse> getProductBySeachkey(@PathVariable("typeID") String searchKey) {
 			BaseResponse baseResponse = new BaseResponse(0, null);
 			try {
-				List<Product> data = productMapper.getAllProductActiveByKey(searchKey);
-				for (Product product : data) {
+				List<ProductResponse> data = productMapper.getAllProductActiveByTypeId(searchKey);
+				for (ProductResponse product : data) {
 					product.setImages(productMapper.getProductPicByID(product.getProductID()));
 				}
 				baseResponse.setStatus(1);
