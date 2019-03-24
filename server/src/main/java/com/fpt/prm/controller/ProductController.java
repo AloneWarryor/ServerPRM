@@ -80,11 +80,11 @@ public class ProductController {
 					BaseResponse baseResponse = new BaseResponse(0, null);
 					
 					try {
-						List<Image> dataPetch = productMapper.getProductPicByID(productId);
-						List<String> data = new ArrayList<String>();
-						for (Image productResponse : dataPetch) {
-							data.add(productResponse.getImage());
-						}
+						List<Image> data = productMapper.getProductPicByID(productId);
+//						List<String> data = new ArrayList<String>();
+//						for (Image productResponse : dataPetch) {
+//							data.add(productResponse.getImage());
+//						}
 					/* not needed anymore
 					 * for (ProductResponse product : data) {
 					 * product.setImages(productMapper.getProductPicByID(product.getProductID())); }
