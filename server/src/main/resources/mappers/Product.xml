@@ -64,6 +64,12 @@ FROM product
 WHERE product.productID = #{productId}
 </select>
 
+<select id="findByUsername" parameterType="String" resultType="com.fpt.prm.model.Product">
+SELECT *
+FROM product
+WHERE product.userName = #{username}
+</select>
+
 <select id="getProductPicByID" parameterType="Integer" resultType="com.fpt.prm.model.Image">
 SELECT *
 FROM image

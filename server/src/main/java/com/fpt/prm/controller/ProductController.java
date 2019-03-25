@@ -43,9 +43,9 @@ public class ProductController {
 		BaseResponse baseResponse = new BaseResponse(0, null);
 		try {
 			List<Product> data = productMapper.getAllProductActive();
-			for (Product product : data) {
-				product.setImages(productMapper.getProductPicByID(product.getProductID()));
-			}
+//			for (Product product : data) {
+//				product.setImages(productMapper.getProductPicByID(product.getProductID()));
+//			}
 			baseResponse.setStatus(1);
 			baseResponse.setData(data);
 		} catch (Exception e) {
@@ -165,5 +165,19 @@ public class ProductController {
 		}
 
 		return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.CREATED);
+	}
+	
+	@GetMapping("public/user/product/{username}")
+	public ResponseEntity<BaseResponse> getProductByUserId(@PathVariable("username") String username) {
+		BaseResponse baseResponse = new BaseResponse(0, null);
+		try {
+			List<ProductResponse> data = productMapper.findByUsername(username);
+			baseResponse.setStatus(1);
+			baseResponse.setData(data);
+		} catch (Exception e) {
+			baseResponse.setStatus(0);
+			e.printStackTrace();
+		}
+		return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
 	}
 }
