@@ -180,4 +180,32 @@ public class ProductController {
 		}
 		return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
 	}
+	
+	@GetMapping("public/user/productActive/{username}")
+	public ResponseEntity<BaseResponse> getProductActiveByUserId(@PathVariable("username") String username) {
+		BaseResponse baseResponse = new BaseResponse(0, null);
+		try {
+			List<ProductResponse> data = productMapper.findActiveByUsername(username);
+			baseResponse.setStatus(1);
+			baseResponse.setData(data);
+		} catch (Exception e) {
+			baseResponse.setStatus(0);
+			e.printStackTrace();
+		}
+		return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
+	}
+	
+	@GetMapping("public/user/productDisable/{username}")
+	public ResponseEntity<BaseResponse> getProductDisableByUserId(@PathVariable("username") String username) {
+		BaseResponse baseResponse = new BaseResponse(0, null);
+		try {
+			List<ProductResponse> data = productMapper.findDisableByUsername(username);
+			baseResponse.setStatus(1);
+			baseResponse.setData(data);
+		} catch (Exception e) {
+			baseResponse.setStatus(0);
+			e.printStackTrace();
+		}
+		return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
+	}
 }

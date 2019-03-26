@@ -26,5 +26,9 @@ public interface ProductMapper {
 	public List<ProductResponse> getAllProductActiveByKeyAndLocation(Map<String, String> paramMap);
 
 	public List<ProductResponse> findByUsername(String username);
+
+	public List<ProductResponse> findActiveByUsername(String username);
+
+	public List<ProductResponse> findDisableByUsername(String username);
 	
 }

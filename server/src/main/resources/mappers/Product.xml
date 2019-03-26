@@ -70,6 +70,19 @@ FROM product
 WHERE product.userName = #{username}
 </select>
 
+<select id="findActiveByUsername" parameterType="String" resultType="com.fpt.prm.model.Product">
+SELECT *
+FROM product
+WHERE product.userName = #{username} and product.status = 1
+</select>
+
+
+<select id="findDisableByUsername" parameterType="String" resultType="com.fpt.prm.model.Product">
+SELECT *
+FROM product
+WHERE product.userName = #{username} and product.status = 0
+</select>
+
 <select id="getProductPicByID" parameterType="Integer" resultType="com.fpt.prm.model.Image">
 SELECT *
 FROM image
