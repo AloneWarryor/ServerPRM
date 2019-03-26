@@ -181,7 +181,7 @@ public class ProductController {
 		return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
 	}
 	
-	@GetMapping("public/user/productActive/{username}")
+	@GetMapping("public/user/productsActive/{username}")
 	public ResponseEntity<BaseResponse> getProductActiveByUserId(@PathVariable("username") String username) {
 		BaseResponse baseResponse = new BaseResponse(0, null);
 		try {
@@ -195,7 +195,7 @@ public class ProductController {
 		return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
 	}
 	
-	@GetMapping("public/user/productDisable/{username}")
+	@GetMapping("public/user/productsDisable/{username}")
 	public ResponseEntity<BaseResponse> getProductDisableByUserId(@PathVariable("username") String username) {
 		BaseResponse baseResponse = new BaseResponse(0, null);
 		try {
