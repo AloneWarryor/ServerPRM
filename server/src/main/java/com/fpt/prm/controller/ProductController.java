@@ -157,7 +157,7 @@ public class ProductController {
 		try {
 			int productID = productMapper.createNewProduct(new Product(0, product.getProductName(), product.getTypeID(),
 					product.getPrice(), principal.getName(), product.getDescription(), product.getImage().get(0), false,
-					product.getAddressID(), product.getPriority(), product.getNumberOfDaysPriority(), new Date(),
+					product.getAddressID(), 0, 0, new Date(),
 					new Date(), principal.getName(), principal.getName()));
 			for (String image : product.getImage()) {
 				productMapper.addImage(
@@ -179,8 +179,8 @@ public class ProductController {
 		BaseResponse baseResponse = new BaseResponse(0, null);
 		try {
 			int status = productMapper.updateProduct(new Product(product.getProductID(), product.getProductName(), product.getTypeID(),
-					product.getPrice(), principal.getName(), product.getDescription(), product.getImage().get(0), false,
-					product.getAddressID(), product.getPriority(), product.getNumberOfDaysPriority(), new Date(),
+					product.getPrice(), principal.getName(), product.getDescription(), product.getImage().get(0), product.isStatus(),
+					product.getAddressID(), 0, 0, new Date(),
 					new Date(), principal.getName(), principal.getName()));
 			for (String image : product.getImage()) {
 				productMapper.deleteOldImage(product.getProductID());
