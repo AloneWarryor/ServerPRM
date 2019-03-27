@@ -58,6 +58,28 @@ WHERE product.status = 1 AND product.productName LIKE CONCAT("%", #{searchKey}, 
 ORDER BY product.updatedDate DESC
 </select>
 
+
+<select id="getProductByAddressTypeStatus" parameterType="Map" resultType="com.fpt.prm.model.ProductResponse">
+SELECT `product`.`productID`,
+    `product`.`productName`,
+    `product`.`typeID`,
+    `product`.`price`,
+    `product`.`userName`,
+    `product`.`description`,
+    `product`.`image`,
+    `product`.`status`,
+    `account`.`address` as `address`,
+    `product`.`priority`,
+    `product`.`numberOfDaysPriority`,
+    `product`.`createdDate`,
+    `product`.`updatedDate`,
+    `product`.`createdUser`,
+    `product`.`updatedUser`
+FROM product JOIN account ON product.userName = account.userName
+WHERE product.addressID = #{addressID} AND product.typeID = #{typeID} AND product.status = #{status}
+ORDER BY product.updatedDate DESC
+</select>
+
 <select id="getProductByID" parameterType="Integer" resultType="com.fpt.prm.model.Product">
 SELECT *
 FROM product

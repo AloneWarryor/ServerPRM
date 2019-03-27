@@ -34,5 +34,7 @@ public interface ProductMapper {
 	public int updateProduct(Product product);
 
 	public void deleteOldImage(int productID);
+
+	public List<ProductResponse> getProductByAddressTypeStatus(Map<String, String> paramMap);
 	
 }

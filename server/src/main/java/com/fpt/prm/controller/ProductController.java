@@ -135,12 +135,18 @@ public class ProductController {
 //		return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
 //	}
 
-	@GetMapping(value = "public/products/{productId}")
-	public ResponseEntity<BaseResponse> getProductByID(@PathVariable("productId") int productId) {
+	@GetMapping(value = "public/products/{addressID}/{typeID}/{status}")
+	public ResponseEntity<BaseResponse> getProductByID(@PathVariable("addressID") String addressID, @PathVariable("typeID") String typeID, @PathVariable("status") String status) {
 		BaseResponse baseResponse = new BaseResponse(0, null);
 		try {
-			Product data = productMapper.getProductByID(productId);
-			data.setImages(productMapper.getProductPicByID(data.getProductID()));
+			Map<String, String> paramMap = new HashMap<String, String>();
+			paramMap.put("addressID", addressID);
+			paramMap.put("typeID", typeID);
+			paramMap.put("status", status);
+			List<ProductResponse> data = productMapper.getProductByAddressTypeStatus(paramMap);
+			for (ProductResponse product : data) {
+				product.setImages(productMapper.getProductPicByID(product.getProductID()));
+			}
 			baseResponse.setStatus(1);
 			baseResponse.setData(data);
 		} catch (Exception e) {
@@ -149,6 +155,8 @@ public class ProductController {
 		}
 		return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
 	}
+	
+	
 
 	// Creates a new product
 	@PostMapping(path = "/product", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
