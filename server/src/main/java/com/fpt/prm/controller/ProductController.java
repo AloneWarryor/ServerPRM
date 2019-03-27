@@ -156,7 +156,7 @@ public class ProductController {
 		BaseResponse baseResponse = new BaseResponse(0, null);
 		try {
 			int productID = productMapper.createNewProduct(new Product(0, product.getProductName(), product.getTypeID(),
-					product.getPrice(), principal.getName(), product.getDescription(), product.getImages().get(0).getImage(), false,
+					product.getPrice(), principal.getName(), product.getDescription(), product.getImages().get(0).getImage(), true,
 					product.getAddressID(), 0, 0, new Date(),
 					new Date(), principal.getName(), principal.getName()));
 			for (Image image : product.getImages()) {
