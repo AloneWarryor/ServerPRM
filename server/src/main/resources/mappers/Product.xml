@@ -151,8 +151,6 @@ UPDATE `product` SET
 `image` = #{image},
 `status` = #{status},
 `addressID` = #{addressID},
-`priority` = #{priority},
-`numberOfDaysPriority` = #{numberOfDaysPriority},
 `updatedDate` = #{updatedDate},
 `updatedUser` = #{updatedUser}
 WHERE productID = #{productID} and userName = #{userName}
