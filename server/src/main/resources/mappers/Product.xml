@@ -157,7 +157,7 @@ WHERE productID = #{productID} and userName = #{userName}
 </update>
 
 <delete id="deleteOldImage" parameterType="Integer">
-  delete from product where productID = #{productID}
+  delete from image where productID = #{productID}
 </delete>
 
 
