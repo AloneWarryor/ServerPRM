@@ -156,12 +156,12 @@ public class ProductController {
 		BaseResponse baseResponse = new BaseResponse(0, null);
 		try {
 			int productID = productMapper.createNewProduct(new Product(0, product.getProductName(), product.getTypeID(),
-					product.getPrice(), principal.getName(), product.getDescription(), product.getImage().get(0), false,
+					product.getPrice(), principal.getName(), product.getDescription(), product.getImages().get(0).getImage(), false,
 					product.getAddressID(), 0, 0, new Date(),
 					new Date(), principal.getName(), principal.getName()));
-			for (String image : product.getImage()) {
+			for (Image image : product.getImages()) {
 				productMapper.addImage(
-						new Image(productID, image, new Date(), new Date(), principal.getName(), principal.getName()));
+						new Image(productID, image.getImage(), new Date(), new Date(), principal.getName(), principal.getName()));
 			}
 			baseResponse.setStatus(1);
 		} catch (Exception e) {
@@ -179,15 +179,18 @@ public class ProductController {
 		BaseResponse baseResponse = new BaseResponse(0, null);
 		try {
 			int status = productMapper.updateProduct(new Product(product.getProductID(), product.getProductName(), product.getTypeID(),
-					product.getPrice(), principal.getName(), product.getDescription(), product.getImage().get(0), product.isStatus(),
+					product.getPrice(), principal.getName(), product.getDescription(), product.getImages().get(0).getImage(), product.isStatus(),
 					product.getAddressID(), 0, 0, new Date(),
 					new Date(), principal.getName(), principal.getName()));
-			for (String image : product.getImage()) {
-				productMapper.deleteOldImage(product.getProductID());
-				productMapper.addImage(
-						new Image(product.getProductID(), image, new Date(), new Date(), principal.getName(), principal.getName()));
-			}
 			baseResponse.setStatus(status);
+			if (status == 0) {
+				throw new Exception("Product id not valid!");
+			}
+			productMapper.deleteOldImage(product.getProductID());
+			for (Image image : product.getImages()) {
+				productMapper.addImage(
+						new Image(product.getProductID(), image.getImage(), new Date(), new Date(), principal.getName(), principal.getName()));
+			}
 		} catch (Exception e) {
 			baseResponse.setStatus(0);
 			e.printStackTrace();
