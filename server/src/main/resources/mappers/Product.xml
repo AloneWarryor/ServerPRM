@@ -142,4 +142,25 @@ VALUES(
 
 </insert>
 
+<update id="updateProduct" parameterType="com.fpt.prm.model.Product">
+UPDATE `product` SET
+`productName` = #{productName},
+`typeID` = #{typeID},
+`price` = #{price},
+`description` = #{description},
+`image` = #{image},
+`status` = #{status},
+`addressID` = #{addressID},
+`priority` = #{priority},
+`numberOfDaysPriority` = #{numberOfDaysPriority},
+`updatedDate` = #{updatedDate},
+`updatedUser` = #{updatedUser}
+WHERE productID = #{productID} and userName = #{userName}
+</update>
+
+<delete id="deleteOldImage" parameterType="Integer">
+  delete from product where productID = #{productID}
+</delete>
+
+
 </mapper>

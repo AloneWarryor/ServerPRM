@@ -30,5 +30,9 @@ public interface ProductMapper {
 	public List<ProductResponse> findActiveByUsername(String username);
 
 	public List<ProductResponse> findDisableByUsername(String username);
+
+	public int updateProduct(Product product);
+
+	public void deleteOldImage(int productID);
 	
 }

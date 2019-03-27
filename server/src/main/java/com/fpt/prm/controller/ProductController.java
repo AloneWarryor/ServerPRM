@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -54,70 +55,71 @@ public class ProductController {
 		}
 		return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
 	}
-	
+
 	// Fetches all products by key
-		@GetMapping(value = "public/productsSearch/{typeID}")
-		public ResponseEntity<BaseResponse> getProductBySeachkey(@PathVariable("typeID") String searchKey) {
-			BaseResponse baseResponse = new BaseResponse(0, null);
-			try {
-				List<ProductResponse> data = productMapper.getAllProductActiveByTypeId(searchKey);
-			/* not needed anymore
-			 * for (ProductResponse product : data) {
+	@GetMapping(value = "public/productsSearch/{typeID}")
+	public ResponseEntity<BaseResponse> getProductBySeachkey(@PathVariable("typeID") String searchKey) {
+		BaseResponse baseResponse = new BaseResponse(0, null);
+		try {
+			List<ProductResponse> data = productMapper.getAllProductActiveByTypeId(searchKey);
+			/*
+			 * not needed anymore for (ProductResponse product : data) {
 			 * product.setImages(productMapper.getProductPicByID(product.getProductID())); }
 			 */
-				baseResponse.setStatus(1);
-				baseResponse.setData(data);
-			} catch (Exception e) {
-				baseResponse.setStatus(0);
-				e.printStackTrace();
-			}
-			return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
+			baseResponse.setStatus(1);
+			baseResponse.setData(data);
+		} catch (Exception e) {
+			baseResponse.setStatus(0);
+			e.printStackTrace();
 		}
-		
-		// Fetches all products by key
-				@GetMapping(value = "public/productImage/{productId}")
-				public ResponseEntity<BaseResponse> getProductImageById(@PathVariable("productId") int productId) {
-					BaseResponse baseResponse = new BaseResponse(0, null);
-					
-					try {
-						List<Image> data = productMapper.getProductPicByID(productId);
+		return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
+	}
+
+	// Fetches all products by key
+	@GetMapping(value = "public/productImage/{productId}")
+	public ResponseEntity<BaseResponse> getProductImageById(@PathVariable("productId") int productId) {
+		BaseResponse baseResponse = new BaseResponse(0, null);
+
+		try {
+			List<Image> data = productMapper.getProductPicByID(productId);
 //						List<String> data = new ArrayList<String>();
 //						for (Image productResponse : dataPetch) {
 //							data.add(productResponse.getImage());
 //						}
-					/* not needed anymore
-					 * for (ProductResponse product : data) {
-					 * product.setImages(productMapper.getProductPicByID(product.getProductID())); }
-					 */
-						baseResponse.setStatus(1);
-						baseResponse.setData(data);
-					} catch (Exception e) {
-						baseResponse.setStatus(0);
-						e.printStackTrace();
-					}
-					return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
-				}
-		
-		// Fetches all products by key and location
-				@GetMapping(value = "public/productsSearch/{typeID}/{searchKey}")
-				public ResponseEntity<BaseResponse> getProductBySeachkey(@PathVariable("searchKey") String searchKey, @PathVariable("typeID") String typeID) {
-					BaseResponse baseResponse = new BaseResponse(0, null);
-					try {
-						Map<String, String> paramMap = new HashMap<String, String>();
-						paramMap.put("searchKey", searchKey);
-						paramMap.put("typeID", typeID);
-						List<ProductResponse> data = productMapper.getAllProductActiveByKeyAndLocation(paramMap);
-						for (ProductResponse product : data) {
-							product.setImages(productMapper.getProductPicByID(product.getProductID()));
-						}
-						baseResponse.setStatus(1);
-						baseResponse.setData(data);
-					} catch (Exception e) {
-						baseResponse.setStatus(0);
-						e.printStackTrace();
-					}
-					return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
-				}
+			/*
+			 * not needed anymore for (ProductResponse product : data) {
+			 * product.setImages(productMapper.getProductPicByID(product.getProductID())); }
+			 */
+			baseResponse.setStatus(1);
+			baseResponse.setData(data);
+		} catch (Exception e) {
+			baseResponse.setStatus(0);
+			e.printStackTrace();
+		}
+		return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
+	}
+
+	// Fetches all products by key and location
+	@GetMapping(value = "public/productsSearch/{typeID}/{searchKey}")
+	public ResponseEntity<BaseResponse> getProductBySeachkey(@PathVariable("searchKey") String searchKey,
+			@PathVariable("typeID") String typeID) {
+		BaseResponse baseResponse = new BaseResponse(0, null);
+		try {
+			Map<String, String> paramMap = new HashMap<String, String>();
+			paramMap.put("searchKey", searchKey);
+			paramMap.put("typeID", typeID);
+			List<ProductResponse> data = productMapper.getAllProductActiveByKeyAndLocation(paramMap);
+			for (ProductResponse product : data) {
+				product.setImages(productMapper.getProductPicByID(product.getProductID()));
+			}
+			baseResponse.setStatus(1);
+			baseResponse.setData(data);
+		} catch (Exception e) {
+			baseResponse.setStatus(0);
+			e.printStackTrace();
+		}
+		return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
+	}
 
 //	@GetMapping(value = "products/{typeId}")
 //	public ResponseEntity<BaseResponse> getAllproductsByTypeId(@PathVariable("typeId") String typeId) {
@@ -153,9 +155,13 @@ public class ProductController {
 	public ResponseEntity<BaseResponse> addArticle(@RequestBody ProductParam product, Principal principal) {
 		BaseResponse baseResponse = new BaseResponse(0, null);
 		try {
-			int productID = productMapper.createNewProduct(new Product(0, product.getProductName(), product.getTypeID(), product.getPrice(), principal.getName(), product.getDescription(), product.getImage().get(0), false, product.getAddressID(), product.getPriority(), product.getNumberOfDaysPriority(), new Date(), new Date(), principal.getName(),principal.getName()));
+			int productID = productMapper.createNewProduct(new Product(0, product.getProductName(), product.getTypeID(),
+					product.getPrice(), principal.getName(), product.getDescription(), product.getImage().get(0), false,
+					product.getAddressID(), product.getPriority(), product.getNumberOfDaysPriority(), new Date(),
+					new Date(), principal.getName(), principal.getName()));
 			for (String image : product.getImage()) {
-				productMapper.addImage(new Image(productID, image, new Date(), new Date(), principal.getName(), principal.getName()));
+				productMapper.addImage(
+						new Image(productID, image, new Date(), new Date(), principal.getName(), principal.getName()));
 			}
 			baseResponse.setStatus(1);
 		} catch (Exception e) {
@@ -166,7 +172,31 @@ public class ProductController {
 
 		return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.CREATED);
 	}
-	
+
+	// Creates a new product
+	@PutMapping(path = "/product", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<BaseResponse> updateProduct(@RequestBody ProductParam product, Principal principal) {
+		BaseResponse baseResponse = new BaseResponse(0, null);
+		try {
+			int status = productMapper.updateProduct(new Product(product.getProductID(), product.getProductName(), product.getTypeID(),
+					product.getPrice(), principal.getName(), product.getDescription(), product.getImage().get(0), false,
+					product.getAddressID(), product.getPriority(), product.getNumberOfDaysPriority(), new Date(),
+					new Date(), principal.getName(), principal.getName()));
+			for (String image : product.getImage()) {
+				productMapper.deleteOldImage(product.getProductID());
+				productMapper.addImage(
+						new Image(product.getProductID(), image, new Date(), new Date(), principal.getName(), principal.getName()));
+			}
+			baseResponse.setStatus(status);
+		} catch (Exception e) {
+			baseResponse.setStatus(0);
+			e.printStackTrace();
+			return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
+		}
+
+		return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.CREATED);
+	}
+
 	@GetMapping("public/user/product/{username}")
 	public ResponseEntity<BaseResponse> getProductByUserId(@PathVariable("username") String username) {
 		BaseResponse baseResponse = new BaseResponse(0, null);
@@ -180,7 +210,7 @@ public class ProductController {
 		}
 		return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("public/user/productsActive/{username}")
 	public ResponseEntity<BaseResponse> getProductActiveByUserId(@PathVariable("username") String username) {
 		BaseResponse baseResponse = new BaseResponse(0, null);
@@ -194,7 +224,7 @@ public class ProductController {
 		}
 		return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("public/user/productsDisable/{username}")
 	public ResponseEntity<BaseResponse> getProductDisableByUserId(@PathVariable("username") String username) {
 		BaseResponse baseResponse = new BaseResponse(0, null);
