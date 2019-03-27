@@ -2,6 +2,7 @@ package com.fpt.prm.model;
 
 
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -13,7 +14,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonAutoDetect(fieldVisibility = Visibility.ANY)
-public class Account {
+public class Account implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String userName;
 	private String password;
 	private String fullName;
