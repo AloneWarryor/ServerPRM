@@ -163,15 +163,16 @@ public class ProductController {
 	public ResponseEntity<BaseResponse> addArticle(@RequestBody ProductParam product, Principal principal) {
 		BaseResponse baseResponse = new BaseResponse(0, null);
 		try {
-			int productID = productMapper.createNewProduct(new Product(0, product.getProductName(), product.getTypeID(),
+			Product pro = new Product(0, product.getProductName(), product.getTypeID(),
 					product.getPrice(), principal.getName(), product.getDescription(), product.getImages().get(0).getImage(), true,
 					product.getAddressID(), 0, 0, new Date(),
-					new Date(), principal.getName(), principal.getName()));
+					new Date(), principal.getName(), principal.getName());
+			int productID = productMapper.createNewProduct(pro);
 			for (Image image : product.getImages()) {
 				productMapper.addImage(
-						new Image(productID, image.getImage(), new Date(), new Date(), principal.getName(), principal.getName()));
+						new Image(pro.getProductID(), image.getImage(), new Date(), new Date(), principal.getName(), principal.getName()));
 			}
-			baseResponse.setStatus(1);
+			baseResponse.setStatus(productID);
 		} catch (Exception e) {
 			baseResponse.setStatus(0);
 			e.printStackTrace();
